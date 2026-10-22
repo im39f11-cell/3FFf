@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عصّف | 39F - متجر خدمات الكوينز FC 27</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00ffcc;
+            --secondary-color: #7b2cbf;
+            --dark-bg: #07080c;
+            --card-bg: rgba(18, 20, 32, 0.85);
+            --text-color: #ffffff;
+            --gold-color: #ffd700;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #050508, #120b22, #021c1a, #1a081a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: rgba(10, 11, 16, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 255, 204, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-3d {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            animation: rotate3dLogo 6s infinite linear;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes rotate3dLogo {
+            0% { transform: perspective(600px) rotateY(0deg); }
+            50% { transform: perspective(600px) rotateY(180deg) scale(1.08); }
+            100% { transform: perspective(600px) rotateY(360deg); }
+        }
+
+        .logo-container h1 {
+            font-size: 22px;
+            background: linear-gradient(45deg, var(--gold-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .cart-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .cart-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 40px;
+            font-weight: 900;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.03) rotateX(2deg);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 35px rgba(0, 255, 204, 0.25);
+        }
+
+        .card i.main-icon {
+            font-size: 38px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .card:hover i.main-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .card h3 {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #b0b3c6;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 21px;
+            font-weight: 700;
+            color: var(--gold-color);
+            margin-bottom: 20px;
+        }
+
+        .btn-buy {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .btn-buy:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 210px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .item-card-img {
+            max-height: 195px;
+            width: auto;
+            border-radius: 12px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+        }
+
+        .card:hover .item-card-img {
+            transform: scale(1.14) rotate(4deg);
+            filter: drop-shadow(0 0 22px rgba(0, 255, 204, 0.75));
+        }
+
+        .warranty-box {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(18, 20, 32, 0.95));
+            border: 2px solid var(--gold-color);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 60px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
+        }
+
+        .warranty-box h2 {
+            color: var(--gold-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+
+        .warranty-box p {
+            line-height: 1.8;
+            font-size: 15px;
+            color: #d1d5db;
+            margin-bottom: 12px;
+        }
+
+        .contact-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 40px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-decoration: none;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 204, 0.15);
+        }
+
+        .contact-card i {
+            font-size: 30px;
+            color: var(--primary-color);
+        }
+
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 380px;
+            height: 100%;
+            background: #10111a;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 2000;
+            transition: 0.4s ease;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cart-modal.active {
+            left: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+
+        .cart-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #71717a;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg"></div>
+
+    <header>
+        <div class="logo-container">
+            <img src="image_15.png" alt="عصّف | 39F Logo" class="logo-3d">
+            <h1>عصّف | 39F - FC 27</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#pc-coins">كوينز بي سي</a></li>
+            <li><a href="#console-coins">كوينز سوني/اكس بوكس</a></li>
+            <li><a href="#fut">فوت تشامبيون</a></li>
+            <li><a href="#rivals">رايفلز</a></li>
+            <li><a href="#proclubs">برو كلوب</a></li>
+            <li><a href="#sbc">التحديات</a></li>
+            <li><a href="#objectives">المهام</a></li>
+            <li><a href="#warranty">الضمان</a></li>
+        </ul>
+        <button class="cart-btn" onclick="toggleCart()">
+            <i class="fa-solid fa-shopping-cart"></i> السلة (<span id="cart-count">0</span>)
+        </button>
+    </header>
+
+    <div class="container">
+
+        <section id="pc-coins">
+            <h2 class="section-title"><i class="fa-solid fa-desktop"></i> كوينز بي سي (PC) - أسعار خاصة وأرخص</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <i class="fa-solid fa-coins main-icon"></i>
+                    <h3>100 ألف كوينز (PC)</h3>
+                    <p>تسليم سريع وآمن بمنصة PC</p>
+                    <div class="price">45 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('100 ألف كوينز - PC', 45)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-coins main-icon"></i>
+                    <h3>500 ألف كوينز (PC)</h3>
+                    <p>تسليم سريع وآمن بمنصة PC</p>
+                    <div class="price">210 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('500 ألف كوينز - PC', 210)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-coins main-icon"></i>
+                    <h3>1 مليون كوينز (PC)</h3>
+                    <p>تسليم سريع وآمن بمنصة PC</p>
+                    <div class="price">400 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('1 مليون كوينز - PC', 400)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-coins main-icon"></i>
+                    <h3>5 مليون كوينز (PC)</h3>
+                    <p>كمية كبرى بخصم خاص PC</p>
+                    <div class="price">1,900 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('5 مليون كوينز - PC', 1900)">إضافة للسلة</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="console-coins">
+            <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> كوينز بلايستيشن & اكس بوكس (PS / Xbox)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <i class="fa-solid fa-gamepad main-icon"></i>
+                    <h3>100 ألف كوينز (سوني/اكس بوكس)</h3>
+                    <p>حسابات مضمونة وآمنة تماماً</p>
+                    <div class="price">55 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('100 ألف كوينز - Console', 55)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-gamepad main-icon"></i>
+                    <h3>1 مليون كوينز (سوني/اكس بوكس)</h3>
+                    <p>حسابات مضمونة وآمنة تماماً</p>
+                    <div class="price">480 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('1 مليون كوينز - Console', 480)">إضافة للسلة</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="fut">
+            <h2 class="section-title"><i class="fa-solid fa-trophy"></i> فوت تشامبيون (Fut Champions)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <i class="fa-solid fa-award main-icon"></i>
+                    <h3>رانك 1 (Rank 1) - فوت تشامبيون</h3>
+                    <p>لعب احترافي لضمان أعلى المكافآت الرسمية للبطولة</p>
+                    <div class="price">150 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('فوت تشامبيون - رانك 1', 150)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-award main-icon"></i>
+                    <h3>رانك 2 / 3 - فوت تشامبيون</h3>
+                    <p>نتائج ممتازة وسريعة لتطوير تشكيلتك</p>
+                    <div class="price">100 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('فوت تشامبيون - رانك 2/3', 100)">إضافة للسلة</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="rivals">
+            <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> دفجن رايفلز (Division Rivals)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <i class="fa-solid fa-crown main-icon" style="color: var(--gold-color);"></i>
+                    <h3>إيليت (Elite Division)</h3>
+                    <p>الوصول إلى قسم النخبة وأقوى مكافآت اللعبة</p>
+                    <div class="price">120 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('رايفلز - إيليت Elite', 120)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-medal main-icon"></i>
+                    <h3>دفجن 1 أو 2 (Division 1/2)</h3>
+                    <p>رفع المستوى وتجاوز الأقسام الصعبة بأمان</p>
+                    <div class="price">80 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('رايفلز - دفجن 1 أو 2', 80)">إضافة للسلة</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="proclubs">
+            <h2 class="section-title"><i class="fa-solid fa-user-ninja"></i> تلفيل برو كلوب (Pro Clubs)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_14.png" alt="Pro Clubs Level 55" class="item-card-img">
+                    </div>
+                    <h3>تلفيل برو كلوب (الحد الأقصى لفل 55)</h3>
+                    <p>رفع مستوى لاعبك واحترافه حتى لفل 55 الجديد بسرعة وبدون باند</p>
+                    <div class="price">130 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('تلفيل برو كلوب - لفل 55', 130)">إضافة للسلة</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="sbc">
+            <h2 class="section-title"><i class="fa-solid fa-fire"></i> تحديات تشكيلة اللاعبين (SBCs)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image.png" alt="Raphinha SBC" class="item-card-img">
+                    </div>
+                    <h3>تحدي راشفورد (POTM)</h3>
+                    <p>تنفيذ التحدي بالكامل بأقل سعر وبأسرع وقت</p>
+                    <div class="price">45 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('تحدي راشفورد SBC', 45)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_2.png" alt="Ferran Torres SBC" class="item-card-img">
+                    </div>
+                    <h3>تحدي فيران توريس (Ligue 1 POTM)</h3>
+                    <p>تنفيذ التحدي الاحترافي بأعلى كفاءة</p>
+                    <div class="price">35 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('تحدي فيران توريس SBC', 35)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_3.png" alt="Olise SBC" class="item-card-img">
+                    </div>
+                    <h3>تحدي أوليسيه (Bundesliga POTM)</h3>
+                    <p>إنجاز التحدي بكل بساطة وسرعة</p>
+                    <div class="price">50 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('تحدي أوليسيه SBC', 50)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_4.png" alt="Malen SBC" class="item-card-img">
+                    </div>
+                    <h3>تحدي مالين (Serie A POTM)</h3>
+                    <p>تنفيذ التحدي وتوفير الكوينز</p>
+                    <div class="price">40 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('تحدي مالين SBC', 40)">إضافة للسلة</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="objectives">
+            <h2 class="section-title"><i class="fa-solid fa-list-check"></i> قسم المهام (Objectives & Group Rewards)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_13.png" alt="Weekly Objectives" class="item-card-img">
+                    </div>
+                    <h3>مهمة الأسبوع الخاصة (Weekly Objectives)</h3>
+                    <p>إنهاء مهام الأسبوع وإنجاز كافة متطلباتها بنجاح</p>
+                    <div class="price">40 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('مهمة الأسبوع الخاصة', 40)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_12.png" alt="500 SP" class="item-card-img">
+                    </div>
+                    <h3>خدمة تجميع نقاط (500 SP)</h3>
+                    <p>إنجاز وتجميع نقاط الموسم 500 SP بسرعة</p>
+                    <div class="price">30 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('تجميع 500 SP', 30)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_5.png" alt="Sanchez Objective" class="item-card-img">
+                    </div>
+                    <h3>مهمة إرث FC Sánchez (غير قابل للمقايضة)</h3>
+                    <p>إنجاز مهمة بطاقة سانشيز الاحترافية بالكامل</p>
+                    <div class="price">65 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('مهمة إرث FC Sánchez', 65)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_6.png" alt="Hunter and Shadow" class="item-card-img">
+                    </div>
+                    <h3>مهمة عناصر الكيمياء (الصياد + الظل)</h3>
+                    <p>إنجاز مهام عناصر الصياد والظل غير القابلة للمقايضة</p>
+                    <div class="price">30 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('مهمة عناصر الصياد والظل', 30)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_7.png" alt="FUT Coins Reward" class="item-card-img">
+                    </div>
+                    <h3>مهمة جمع 3,000 قطع FUT النقدية</h3>
+                    <p>تنفيذ مهام النقود والأرباح السريعة</p>
+                    <div class="price">25 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('مهمة قطع FUT النقدية', 25)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_8.png" alt="82+ Pack" class="item-card-img">
+                    </div>
+                    <h3>مهمة حزمة لاعبين ذهبيين 82+ (2x)</h3>
+                    <p>إنهاء متطلبات الحزمة المزدوجة بنجاح</p>
+                    <div class="price">35 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('مهمة حزمة 82+ (2x)', 35)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_9.png" alt="80+ Pack" class="item-card-img">
+                    </div>
+                    <h3>مهمة حزمة لاعبين ذهبيين 80+ (3x)</h3>
+                    <p>تجميع وإنهاء مهام الحزم الثلاثية</p>
+                    <div class="price">30 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('مهمة حزمة 80+ (3x)', 30)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_10.png" alt="81+ Pack" class="item-card-img">
+                    </div>
+                    <h3>مهمة حزمة لاعبين ذهبيين 81+ (3x)</h3>
+                    <p>إتمام مهام حزم 81+ الاحترافية</p>
+                    <div class="price">40 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('مهمة حزمة 81+ (3x)', 40)">إضافة للسلة</button>
+                </div>
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="image_11.png" alt="83+ Pack" class="item-card-img">
+                    </div>
+                    <h3>مهمة حزمة لاعبين ذهبيين 83+ (2x)</h3>
+                    <p>إنجاز أقوى مهام الحزم المتميزة</p>
+                    <div class="price">50 ر.س</div>
+                    <button class="btn-buy" onclick="addToCart('مهمة حزمة 83+ (2x)', 50)">إضافة للسلة</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="warranty" class="warranty-box">
+            <h2><i class="fa-solid fa-shield-check"></i> الضمان الذهبي وسياسة الاسترجاع</h2>
+            <p><strong>نسبة الأمان:</strong> نسبة الباند 0% نظراً لاستخدام أساليب تسليم آمنة تماماً ومضمونة من قبل محترفين.</p>
+            <p><strong>الضمان الذهبي الشامل:</strong> في حال حدث باند للحساب لا قدر الله، نضمن لك تعويضاً كاملاً بقيمة تشكيلتك كاملة ودون أي تردد.</p>
+            <p><strong>سياسة الاسترجاع:</strong> يحق للعميل استرداد الأموال كاملة في حال لم يتم تنفيذ الطلب أو البدء بالخدمة خلال المدة المحددة.</p>
+        </section>
+
+        <div class="contact-section">
+            <a href="https://twitter.com/1g_s" target="_blank" class="contact-card">
+                <i class="fa-brands fa-x-twitter"></i>
+                <div>
+                    <h4>تويتر المتجر</h4>
+                    <p>@1g_s</p>
+                </div>
+            </a>
+            <a href="https://wa.me/966583296424" target="_blank" class="contact-card">
+                <i class="fa-brands fa-whatsapp"></i>
+                <div>
+                    <h4>رقم التواصل واتساب</h4>
+                    <p>0583296424</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="cart-modal" id="cartModal">
+        <div>
+            <div class="cart-header">
+                <h3>سلة المشتريات</h3>
+                <button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-items" id="cartItemsList">
+                <p style="text-align: center; color: #71717a; margin-top: 50px;">السلة فارغة حالياً</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: 700;">
+                <span>المجموع الكلي:</span>
+                <span id="cartTotal">0 ر.س</span>
+            </div>
+            <button class="btn-buy" onclick="checkout()" style="background: var(--primary-color); color: var(--dark-bg);">إتمام الطلب والدفع عبر الواتساب</button>
+        </div>
+    </div>
+
+    <footer>
+        جميع الحقوق محفوظة © عصّف | 39F - متجر FC 27 الاحترافي | تواصل معنا عبر تويتر @1g_s أو الواتساب 0583296424
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            document.getElementById('cartModal').classList.toggle('active');
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            alert('تمت إضافة "' + name + '" إلى السلة بنجاح!');
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById('cartItemsList');
+            const count = document.getElementById('cart-count');
+            const totalElement = document.getElementById('cartTotal');
+            
+            count.innerText = cart.length;
+            
+            if (cart.length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: #71717a; margin-top: 50px;">السلة فارغة حالياً</p>';
+                totalElement.innerText = '0 ر.س';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;">
+                        <div>
+                            <h5 style="font-size: 14px;">${item.name}</h5>
+                            <span style="color: var(--gold-color); font-size: 13px;">${item.price} ر.س</span>
+                        </div>
+                        <button onclick="removeFromCart(${index})" style="background: none; border: none; color: #ff4d4d; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            list.innerHTML = html;
+            totalElement.innerText = total + ' ر.س';
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('السلة فارغة!');
+                return;
+            }
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+            let message = "مرحباً عصّف | 39F، أرغب في إتمام الطلب التالي:\n";
+            cart.forEach(item => {
+                message += `- ${item.name} (${item.price} ر.س)\n`;
+            });
+            message += `المجموع الكلي: ${total} ر.س\nتويتر المتجر: @1g_s`;
+            
+            let encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/966583296424?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+</html>
